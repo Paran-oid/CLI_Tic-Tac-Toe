@@ -41,6 +41,22 @@ int main()
             user1.set_operator(userInput == 'X' ? 'O' : 'X');
         }
 
-        isRunning = false;
+        board::run_game(user1, user2);
+
+        bool repeat = output::repeat_request();
+        if(repeat == false)
+        {
+            isRunning = false;
+            output::display_scores(user1);
+            output::display_scores(user2);
+        }
+        else
+        {
+            output::display_scores(user1);
+            output::display_scores(user2);
+        }
+
     }
+
+    output::end_program();
 }

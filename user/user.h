@@ -10,11 +10,13 @@ class user {
 public:
     std::string get_name();
     void set_name(const std::string& name);
-
+    char get_operator() const;
     void set_operator(char op);
+    int get_score();
 private:
     std::string Name;
     char Op = ' ';
+    int Score = 0;
 };
 
 

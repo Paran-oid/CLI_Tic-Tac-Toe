@@ -18,3 +18,13 @@ void user::set_operator(const char op)
     Op = op;
 }
 
+char user::get_operator() const
+{
+    return Op;
+}
+
+int user::get_score()
+{
+    return Score;
+}
+
