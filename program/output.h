@@ -14,6 +14,7 @@ public:
     static void enter_index(const std::string& username);
     static bool repeat_request();
     static void display_scores(user user);
+    static void display_result(std::string_view res);
     static void end_program();
 
 };

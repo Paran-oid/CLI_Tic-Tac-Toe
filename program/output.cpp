@@ -59,3 +59,8 @@ void output::end_program()
 {
     std::cout << "thank you for trying my program!" << std::endl;
 }
+
+void output::display_result(std::string_view res)
+{
+    std::cout << res << std::endl;
+}

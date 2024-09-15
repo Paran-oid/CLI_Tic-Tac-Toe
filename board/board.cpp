@@ -12,6 +12,7 @@ void board::run_game(const user& user1,const user& user2)
 {
     GameOn = true;
     int round = 1;
+    std::string result = "It's a draw";
     while(GameOn)
     {
         auto it = std::find(Body.begin(), Body.end(), ' ');
@@ -29,9 +30,20 @@ void board::run_game(const user& user1,const user& user2)
             {
                 user_input(user1);
             }
-            round++;
+            std::optional<user> winner = board::check(user1, user2);
+            if(winner)
+            {
+                result = "We have a winner:" + winner-> get_name();
+                break;
+            }
+            else
+            {
+                round++;
+            }
         }
     }
+    std::string_view res(result);
+    output::display_result(res);
     print_board();
 }
 void board::ai_input()
@@ -76,3 +88,70 @@ void board::print_board()
         }
     }
 }
+
+bool board::is_valid(const std::string& res)
+{
+    if (res.length() != 3) return false;
+    for(int i = 1; i < res.length(); i++)
+    {
+        if(res[i-1] != res[i] || res[i] == ' ')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::optional<user> board::check(const user& user1, const user& user2)
+{
+    std::string temp = "";
+    int offset = 0;
+    for(int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            temp += Body[j + offset];
+        }
+        if(is_valid(temp))
+        {
+            //need to stop this pattern here
+            user winner = user1.get_operator() == temp[0] ? user1 : user2;
+            return winner;
+        }
+        temp = "";
+        offset += 3;
+    }
+
+    temp = "";
+    offset = 0;
+
+    for(int j = 0; j < 3; j++)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            temp += Body[i + offset];
+        }
+        if(is_valid(temp))
+        {
+            user winner = user1.get_operator() == temp[0] ? user1 : user2;
+            return winner;
+        }
+        temp = "";
+        offset += 3;
+    }
+
+    if(is_valid(temp))
+    {
+        user winner = user1.get_operator() == temp[0] ? user1 : user2;
+        return winner;
+    }
+    temp = Body[2] + Body[5] + Body[7];
+    if(is_valid(temp))
+    {
+        user winner = user1.get_operator() == temp[0] ? user1 : user2;
+        return winner;
+    }
+
+    return std::nullopt;
+}
+

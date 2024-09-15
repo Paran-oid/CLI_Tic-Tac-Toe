@@ -28,3 +28,8 @@ int user::get_score()
     return Score;
 }
 
+void user::increment_score()
+{
+    ++Score;
+}
+
