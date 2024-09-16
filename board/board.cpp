@@ -33,7 +33,7 @@ void board::run_game(const user& user1,const user& user2)
             std::optional<user> winner = board::check(user1, user2);
             if(winner)
             {
-                result = "We have a winner:" + winner-> get_name();
+                result = "We have a winner!! \n it's: " + winner -> get_name();
                 break;
             }
             else
@@ -42,9 +42,9 @@ void board::run_game(const user& user1,const user& user2)
             }
         }
     }
+    system("clear");
     std::string_view res(result);
     output::display_result(res);
-    print_board();
 }
 void board::ai_input()
 {
@@ -94,7 +94,7 @@ bool board::is_valid(const std::string& res)
     if (res.length() != 3) return false;
     for(int i = 1; i < res.length(); i++)
     {
-        if(res[i-1] != res[i] || res[i] == ' ')
+        if(res[i-1] != res[i] || res[i] == ' ' || res[i] == '\0')
         {
             return false;
         }
@@ -129,7 +129,8 @@ std::optional<user> board::check(const user& user1, const user& user2)
     {
         for(int i = 0; i < 3; i++)
         {
-            temp += Body[i + offset];
+            temp += Body[j + offset];
+            offset += 3;
         }
         if(is_valid(temp))
         {
@@ -145,11 +146,21 @@ std::optional<user> board::check(const user& user1, const user& user2)
         user winner = user1.get_operator() == temp[0] ? user1 : user2;
         return winner;
     }
-    temp = Body[2] + Body[5] + Body[7];
+
+    temp = {Body[2], Body[4], Body[6]};
     if(is_valid(temp))
     {
         user winner = user1.get_operator() == temp[0] ? user1 : user2;
         return winner;
+    }
+    else
+    {
+        temp = {Body[0], Body[4], Body[8]};
+        if(is_valid(temp))
+        {
+            user winner = user1.get_operator() == temp[0] ? user1 : user2;
+            return winner;
+        }
     }
 
     return std::nullopt;
