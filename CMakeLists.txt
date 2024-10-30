@@ -3,13 +3,16 @@ project(Tic_Tac_Toe)
 
 set(CMAKE_CXX_STANDARD 26)
 
-add_executable(Tic_Tac_Toe main.cpp
-        board/board.cpp
-        board/board.h
-        program/output.cpp
-        ai/ai.cpp
-        ai/ai.h
-        user/user.cpp
-        user/user.h
-        program/output.h
+set(SRC
+        src/main.cpp
+        src/output.cpp
+        src/user.cpp
+        src/board.cpp)
+
+set(INCLUDE_DIR
+    include)
+
+add_executable(Tic_Tac_Toe
+    ${SRC}
 )
+target_include_directories(Tic_Tac_Toe PRIVATE ${INCLUDE_DIR})
