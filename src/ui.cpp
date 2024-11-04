@@ -6,16 +6,6 @@
 
 
 void ui::init_grid() {
-    int gridSize = 4;
-    int spacing = 30;
-
-    for(int i = 0; i < gridSize; i++) {
-        for(int j = 0; j < gridSize; j++) {
-            int index = gridSize * i + j;
-            grid[index].position = sf::Vector2f(j * spacing, i * spacing);
-            grid[index].color = sf::Color::Black;
-        }
-    }
 }
 
 void ui::loop() {
