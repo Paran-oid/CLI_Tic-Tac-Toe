@@ -2,24 +2,19 @@
 #include <random>
 #include <chrono>
 #include <memory>
-#include "ui.h"
 
 #include "board.h"
 #include "user.h"
 #include "output.h"
 
-int main() {
-    auto interface = std::make_unique<ui>();
-    interface->loop();
-}
 
-/*int main()
+int main()
 {
     bool isRunning = true;
     char userInput = ' ';
 
-    std::unique_ptr<user> user1;
-    std::unique_ptr<user> user2;
+    std::unique_ptr<user> user1 = std::make_unique<user>();
+    std::unique_ptr<user> user2 = std::make_unique<user>();
 
     int beginUser;
     //assign the user who will begin
@@ -72,4 +67,4 @@ int main() {
     }
 
     output::end_program();
-}*/
+}

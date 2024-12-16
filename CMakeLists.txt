@@ -7,8 +7,7 @@ set(SRC
         src/main.cpp
         src/output.cpp
         src/user.cpp
-        src/board.cpp
-        src/ui.cpp)
+        src/board.cpp)
 
 
 set(INCLUDE_DIR

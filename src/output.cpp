@@ -4,11 +4,11 @@
 #include "output.h"
 #include "user.h"
 
-std::string output::get_username(const int id)
+std::string output::get_username(int id)
 {
     std::string name;
     std::cout << "What's your name? user: " << id << std::endl;;
-    std::cin >> name;
+    std::getline(std::cin, name);
     return name;
 }
 
